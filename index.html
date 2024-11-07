@@ -11,52 +11,48 @@
 
 <body>
   <header>
-      <p class="d-inline-flex gap-1">
-      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        <svg width="40" height="30" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
-  <!-- Top Line -->
-  <rect x="0" y="5" width="26" height="3" rx="1.5" ry="1.5" fill="#000"/>
-  <!-- Middle Line -->
-  <rect x="0" y="13" width="36" height="3" rx="1.5" ry="1.5" fill="#000"/>
-  <!-- Bottom Line -->
-  <rect x="0" y="21" width="16" height="3" rx="1.5" ry="1.5" fill="#000"/>
-</svg>
-      </a>
-    </p>
-    <div class="collapse" id="collapseExample">
-      <div class="card card-body">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+      <svg width="40" height="30" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top Line -->
+        <rect x="0" y="5" width="24" height="3" rx="1.5" ry="1.5" fill="#000" />
+        <!-- Middle Line -->
+        <rect x="0" y="13" width="30" height="3" rx="1.5" ry="1.5" fill="#000" />
+        <!-- Bottom Line -->
+        <rect x="0" y="21" width="18" height="3" rx="1.5" ry="1.5" fill="#000" />
+      </svg>
+    </button>
+    
+    <div class="offcanvas offcanvas-start custom-offcanvas-width" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">NOTE.IO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div
+      
+      <div class="offcanvas-body">
         <ul>
-          <li>
-             <a href="#">Add note</a>
+          <li><a href="#" id="addbtn">Add Note</a>
           </li>
           
           <li>
-             <a href="#">Clear all</a>
+            <a href="#" id="clear">Clear All Notes</a>
           </li>
         </ul>
       </div>
     </div>
     
-    <div class="">
+    <div class="small">
         <small>Recent notes</small>
     </div>
     
     <div class="search">
-      <input type="search" placeholder="find your notes" id="searchinput">
-      
-      <button>
-        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <!-- Lens of the Magnifying Glass -->
-  <circle cx="10" cy="10" r="7" stroke="#000" stroke-width="2" fill="none"/>
-  <!-- Handle of the Magnifying Glass with rounded ends -->
-  <line x1="14" y1="14" x2="20" y2="20" stroke="#000" stroke-width="2" stroke-linecap="round"/>
-</svg>
-      </button>
+     <button><i class="fa-solid fa-magnifying-glass"></i> </button>
     </div>
   </header>
   
+    <input type="search" placeholder="find your notes" id="searchinput">
+  
   <main>
-       <section class="landing-page">
+       <section class="main-page">
         <div class="note note1">
       
       <div class="header">
@@ -65,7 +61,7 @@
       
       <div class="content">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a libero lorem. Vestibulum id nibh mauris. Aliquam vitae quam eu nunc tempus ultricies non nec nulla. Suspendisse pharetra lobortis ante vitae varius.  </p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a libero lorem. Vestibulum id nibh mauris. Aliquam vitae quam eu nunc tempusus.</p>
       </div>
     </div>
     
@@ -92,7 +88,8 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a libero lorem. Vestibulum id nibh mauris. Aliquam vitae quam eu nunc tempus </p>
       </div>
     </div>
-    
+   
+     <div class="note note4">
           <div class="header">
         <h2>Title 4</h2>
       </div>
@@ -105,10 +102,7 @@
     
             <div class="add-icon">
    <button id="addbtn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
+       <i class="fa-solid fa-plus"></i>
    </button>
     </div>
     
@@ -117,12 +111,9 @@
     <!--- edit page -->
     
     <section class="edit">
-      <div class="arrow-left">
-       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
-         <line x1="19" y1="12" x2="5" y2="12"></line>
-         <polyline points="12 19 5 12 12 5"></polyline>
-       </svg>
-     </div>
+      <button class="arrow-left">
+       <i class="fa-solid fa-arrow-left"></i>
+     </button>
      
       <div class="title">
         <input type="text" placeholder="Enter Title Here">
@@ -139,6 +130,8 @@
    made with 😍 by Dr Matthew.
  </footer>
  
+ <script type="text/javascript" charset="utf-8" scr="./js/script.js"></script>
+ <script src="https://kit.fontawesome.com/72fe87b69d.js" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

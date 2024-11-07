@@ -2,13 +2,117 @@ html {
   scroll-behavior: smooth;
 }
 
+body{
+  width: 90%;
+}
+
 header{
   width: 100%;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 1em 10px;
 }
 
-header a{
-  background-color: #fff;
+header .btn{
+  background-color: transparent;
+  color: #000;
+  border: none;
+  width: 20%;
+  margin: 0 -0.2em;
+}
+
+header .btn:hover {
+  background-color: transparent;
+  border: none;
+}
+
+header .custom-offcanvas-width{
+  background-color: whitesmoke;
+  width: 10px;
+  height: 25vh;
+  margin: 2.1em 0;
+}
+
+header .offcanvas-header h5{
+  font-size: 1.8em;
+   font-weight: bold;
+}
+
+header .offcanvas-body ul{
+  list-style: none;
+}
+
+header .offcanvas-body ul li a{
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+header .small{
+  width: 60%;
+  margin-top: 1em;
+  margin-left: 4em;
+  white-space: nowrap;
+}
+
+header .small small{
+  font-size: 1.1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+}
+
+header .search{
+  width: 20%;
+  margin-left: 6em;
+}
+
+header button{
+  background-color: transparent;
+  border: none;
+  font-size: 1.3em;
+}
+
+body input{
+  width: 40%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  margin-top: -3em;
+  margin-left: 13.6em;
+}
+
+body input .hide{
+  display: none;
+}
+
+main{
+  width: 100%;
+  margin-top: 1.5em;
+  margin-left: 1em;
+}
+
+main .main-page{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+main .note{
+  background-color: #425A48;
+  width: 46%;
+  height: auto;
+  text-align: center;
+  padding: 9px;
+  margin: 6px 6px;
+  overflow: hidden;
+}
+
+
+
+
+
+
+main .edit{
+  display: none;
 }
