@@ -1,0 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+
+header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+header a{
+  background-color: #fff;
+}
