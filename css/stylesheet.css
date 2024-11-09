@@ -8,7 +8,7 @@ body{
 
 header{
   width: 100%;
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   margin: 1em 10px;
@@ -81,7 +81,7 @@ body input{
   margin-left: 13.4em;
 }
 
-body input .hide{
+body .search-input{
   display: none;
 }
 
@@ -92,7 +92,7 @@ main{
 }
 
 main .main-page{
-  display: flex;
+  display: none;
   flex-direction: row;
  /* align-items: flex-start;*/
   align-content: flex-start;
@@ -139,7 +139,17 @@ main .add-icon button{
   border-radius: 50%;
 }
 
-
 main .edit{
-  display: none;
+  background-color: yellow;
+  width: 100%;
+  height: 90vh;
+  padding: 4em;
+}
+
+main .edit ul{
+  list-style: none;
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
 }
