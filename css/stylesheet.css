@@ -8,7 +8,7 @@ body{
 
 header{
   width: 100%;
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 1em 10px;
@@ -30,7 +30,7 @@ header .btn:hover {
 header .custom-offcanvas-width{
   background-color: whitesmoke;
   width: 10px;
-  height: 25vh;
+  height: 28vh;
   margin: 2.1em 0;
 }
 
@@ -81,9 +81,6 @@ body .input{
   margin-left: 13.4em;
 }
 
-body .search-input{
-  display: none;
-}
 
 main{
   width: 100%;
@@ -92,7 +89,7 @@ main{
 }
 
 main .main-page{
-  display: none;
+  display: flex;
   flex-direction: row;
  /* align-items: flex-start;*/
   align-content: flex-start;
@@ -180,9 +177,15 @@ main .edit ul .btn{
   font-size: 1.5em;
 }
 
-main .edit .offcanvas-body a{
+main .edit ol{
+  list-style: none;
+}
+
+main .edit .offcanvas-body ol a{
   text-decoration: none;
   font-size: 1.1em;
+  font-family: sans-serif;
+  margin: 16px 0;
 }
 
 main .edit .edit-note{
@@ -209,4 +212,8 @@ main .edit .edit-note textarea{
   resize: none;
   margin: 0 -2.8em;
   outline: none;
+}
+
+.hide{
+  display: none;
 }
