@@ -122,13 +122,13 @@ main .add-icon{
   width: 50%;
   position: fixed;
   top: 40em;
-  left: 9.7em;
+  left: 9.4em;
 }
 
 main .add-icon button{
   background-color: #C12E1F;
-  width: 30%;
-  height: 41%;
+  width: 35%;
+  height: 35%;
   padding: 10px;
   font-size: 1.8em;
   color: #fff;
@@ -214,6 +214,6 @@ main .edit .edit-note textarea{
   outline: none;
 }
 
-.hide{
+.hide {
   display: none;
 }
