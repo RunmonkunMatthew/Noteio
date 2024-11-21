@@ -66,6 +66,32 @@ header .search{
   margin-left: 5em;
 }
 
+.slidein{
+  animation: slide 0.8s ease;
+}
+
+.slideout{
+  animation: slideout 0.8s ease;
+}
+
+@keyframes slide{
+  from{
+    margin-left: 9em;
+  }
+  to{
+    margin-left: 0.2em;
+  }
+}
+
+@keyframes slideout{
+  from{
+    margin-left: 8em;
+  }
+  to{
+    margin-left: 9em;
+  }
+}
+
 header button{
   background-color: transparent;
   border: none;
@@ -76,7 +102,8 @@ body .input{
   width: 42%;
   outline: none;
   border: none;
-  border-bottom: 2px solid #ccc;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
   margin-top: -2em;
   margin-left: 13.4em;
 }
@@ -167,7 +194,8 @@ main .edit ul .arrow-left{
 main .edit ul .small{
   font-size: 1.2em;
   font-weight: bold;
-  margin: 0.4em 0;
+  margin-top: 0.4em;
+  margin-left: 30px;
 }
 
 main .edit ul .btn{
@@ -175,6 +203,17 @@ main .edit ul .btn{
   border: none;
   outline: none;
   font-size: 1.5em;
+}
+
+main .edit ul li #save{
+  background-color: transparent;
+  display: none;
+  border: none;
+  font-size: 1.5em;
+  margin-top: 6px;
+  margin-left: 1em;
+  position: fixed;
+  width: 10%;
 }
 
 main .edit ol{
@@ -198,19 +237,25 @@ main .edit .edit-note .title{
 }
 
 main .edit .edit-note .title input{
+  background-color: transparent;
   text-align: center;
   width: 85%;
   font-size: 1.4em;
+  font-weight: bold;
   border: none;
   border-bottom: 2px solid #ccc;
   outline: none;
 }
 
 main .edit .edit-note textarea{
-  width: 115%;
+  background-color: transparent;
+  width: 113%;
   height: 70vh;
+  text-align: center;
+  font-size: 1.1em;
+  border: none;
   resize: none;
-  margin: 0 -2.8em;
+  margin: 0 -2.4em;
   outline: none;
 }
 
