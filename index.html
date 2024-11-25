@@ -37,7 +37,7 @@
           </li>
           
           <li>
-            <a href="#" id="clear">Clear All Notes</a>
+            <a href="#" id="clearbtn">Clear All Notes</a>
           </li>
         </ul>
       </div>
@@ -58,6 +58,7 @@
   
   <main>
        <section class="main-page">
+     <div class="allnotes">
         <div class="note note1">
           
         <h2>Title 1</h2>
@@ -95,12 +96,13 @@
           Note 4
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a libero lorem. Vestibulum id nibh mauris. Aliquam vitae quam eu nunc tempus ultricies non nec nulla. Suspendisse pharetra lobortis ante vitae varius. </p>
     </div>
+   </div>
     
-            <div class="add-icon">
+          <div class="add-icon">
    <button id="addbtn">
        <i class="fa-solid fa-plus"></i>
    </button>
-    </div>
+          </div>
     
     </section>
     
@@ -122,8 +124,8 @@
            </div>
          </li>
          
-                    <li class="savebtn">
-             <button id="save">
+                 <li class="savebtn">
+             <button class="hide" id="save">
             <i class="fa-regular fa-floppy-disk"></i>
            </button>
            </li>
@@ -150,7 +152,7 @@
                 <div class="offcanvas-body">
                   <ol>
                     <li>
-                     <a href="#">Delete Note</a>
+                     <a href="#" id="delete">Delete Note</a>
                     </li>
                     
                     <li>
@@ -158,7 +160,7 @@
                     </li>
                     
                     <li>
-                      <a href="#">Export Note</a>
+                      <a href="#" id="export">Export Note</a>
                     </li>
                   </ol>
                 </div>

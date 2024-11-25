@@ -41,11 +41,17 @@ header .offcanvas-header h5{
 
 header .offcanvas-body ul{
   list-style: none;
+  line-height: 1.6;
 }
 
 header .offcanvas-body ul li a{
   text-decoration: none;
+  font-weight: bold;
   font-size: 1.1em;
+}
+
+header .offcanvas-body ul li a:hover{
+  font-size: 1.2em;
 }
 
 header .small{
@@ -70,25 +76,18 @@ header .search{
   animation: slide 0.8s ease;
 }
 
-.slideout{
-  animation: slideout 0.8s ease;
-}
-
 @keyframes slide{
   from{
-    margin-left: 9em;
+    margin-left: 6em;
+    opacity: 0;
+  }
+  
+  50%{
+    opacity: 0.2;
   }
   to{
     margin-left: 0.2em;
-  }
-}
-
-@keyframes slideout{
-  from{
-    margin-left: 8em;
-  }
-  to{
-    margin-left: 9em;
+    opacity: 1;
   }
 }
 
@@ -100,6 +99,7 @@ header button{
 
 body .input{
   width: 42%;
+  padding: 2px;
   outline: none;
   border: none;
   border-left: 2px solid #000;
@@ -115,7 +115,7 @@ main{
   margin-left: 1.5em;
 }
 
-main .main-page{
+main .allnotes{
   display: flex;
   flex-direction: row;
  /* align-items: flex-start;*/
@@ -123,7 +123,7 @@ main .main-page{
   flex-wrap: wrap;
   gap: 10px;
   width: 100%;
-  height: 130vh;
+  height: 120vh;
 }
 
 main .note{
@@ -172,7 +172,7 @@ main .edit{
 
 main .custom-width{
   width: 10px;
-  height: 25vh;
+  height: 28vh;
   margin: 2.1em 0;
 }
 
@@ -207,22 +207,28 @@ main .edit ul .btn{
 
 main .edit ul li #save{
   background-color: transparent;
-  display: none;
   border: none;
   font-size: 1.5em;
   margin-top: 6px;
-  margin-left: 1em;
-  position: fixed;
+  margin-left: 1.8em;
+  position: relative;
   width: 10%;
 }
 
 main .edit ol{
   list-style: none;
+  line-height: 1.6;
+}
+
+main .edit h5{
+  font-size: 1.6em;
+  font-weight: 700;
 }
 
 main .edit .offcanvas-body ol a{
   text-decoration: none;
   font-size: 1.1em;
+  font-weight: bold;
   font-family: sans-serif;
   margin: 16px 0;
 }
@@ -261,4 +267,11 @@ main .edit .edit-note textarea{
 
 .hide {
   display: none;
+}
+
+.check{
+  font-size: 1.1em;
+  text-align: center;
+  color: #ccc;
+  margin:12em auto;
 }
