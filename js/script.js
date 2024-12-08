@@ -17,7 +17,15 @@ const clearBtn = document.querySelector('#clearbtn');
 const deleteBtn = editPage.querySelector('#delete');
 const ExportBtn = editPage.querySelector('#export');
 
-
+//display notes in the dom
+function displayNotesInStorage() {
+  let notesFromStorage = getNotesFromStorage();
+  
+  notesFromStorage.forEach((note) => {
+    allnotes.appendChild;
+  })
+}
+// add notes to the Dom
 function addNoteToDom(){
   const div = document.createElement('div');
   div.classList = 'note';
@@ -38,15 +46,41 @@ function addNoteToDom(){
   
 
   allnotes.appendChild(div);
+  saveBtn.classList.add('hide');
+  
+  addNoteToStorage();
 }
+
+//Add notes to local storage 
+function addNoteToStorage() {
+   notesFromStorage = getNotesFromStorage();
+  
+   localStorage.setItem('notes', JSON.stringify(notesFromStorage));
+};
+
+//get notes from storage
+function getNotesFromStorage() {
+   let notes = JSON.parse(localStorage.getItem('notes')) || [];
+  
+   let newNote = {
+    header: noteInput.value,
+    body: textArea.value
+  };
+ 
+   notes.push(newNote);
+ 
+   return notes;
+ };
 
 //open editpage 
 function openEdit() {
   const noteTitle = editNote.querySelector('input');
 const textArea = editNote.querySelector('textarea');
+const check = document.querySelector('.check');
 
     noteTitle.value = '';
     textArea.value = '';
+    check.classList.add('hide')
     
     mainPage.style.display = 'none';
     header.style.display = 'none';
@@ -62,26 +96,53 @@ const textArea = editNote.querySelector('textarea');
 
 //put selected notes into edit page
 function putNoteToEdit(e) {
-    const selectedNote =  e.target.closest('.note');
+    let selectedNote =  e.target;
     
-    if (!selectedNote) return;
-   
-  const noteTitle = editNote.querySelector('input');
+    if (!selectedNote.classList.contains('note')) {
+      selectedNote = selectedNote.closest('.note');
+    }
+    
+    if (selectedNote.classList.contains('note')) {
+      
+      notes.forEach((note) => {
+        note.classList.remove('selected')
+      });
+      
+      const noteTitle = editNote.querySelector('input');
 const textArea = editNote.querySelector('textarea');
 const selectedNoteTitle = editPage.querySelector('h5');
 
      const header = selectedNote.querySelector('h2');
    const body = selectedNote.querySelector('p');
+   
    selectedNote.classList.add('selected');
      
     noteTitle.value =   header.innerText;
      textArea.value = body.innerText;
-     
      selectedNoteTitle.innerText = header.innerText;
-   
+    }
+    
  showEditPage();
-
 };
+
+//search function 
+function searchNotes(e) {
+  const searchInput = document.querySelector('#searchinput');
+
+  const input = searchInput.value.toLowerCase();
+     
+   const notes = document.querySelectorAll('.note');
+   
+  notes.forEach((note) => {
+    let noteHeader = note.querySelector('h2');
+    
+    if(noteHeader.textContent.toLowerCase().includes(input)) {
+      note.style.display = 'block';
+    } else {
+      note.style.display = 'none';
+    }
+  })
+}
 
 function saveNotes() {
   saveBtn.classList.add('hide');
@@ -100,6 +161,13 @@ function showMainPage() {
     body.style.backgroundColor = '#fff';
     editPage.classList.add('hide')
     editPage.classList.remove('show');
+    
+ 
+    if (noteInput.value === '') {
+   noteInput.value = 'Note Title'
+  return; 
+}
+    checkUi();
 };
 
 //show edit page
@@ -151,23 +219,21 @@ function closeOffcanvas() {
 function checkUi() {
  const notes = mainPage.querySelectorAll('.note');
  const allnotes = mainPage.querySelector('.allnotes')
+ const check = document.querySelector('.check');
  
  if (notes.length === 0) {
-   const div = document.createElement('div');
-   div.innerHTML = `<strong>No Notes here yet</strong>`
-   div.classList.add('check');
-   
-   allnotes.appendChild(div);
+   check.classList.remove('hide');
+ } else{
+   check.classList.add('hide');
  }
+ 
 }
 
 
 //Initialize 
 function init() {
    //Event Listeners
-notes.forEach((note) => {
-  note.addEventListener('click', putNoteToEdit);
-})
+allnotes.addEventListener('click', putNoteToEdit);
 
 searchIcon.addEventListener('click',() => {
   searchInput.classList.add('slidein');
@@ -186,10 +252,12 @@ textArea.addEventListener('input', () => {
   saveBtn.classList.remove('hide');
 })
 clearBtn.addEventListener('click', clearAllNotes);  
-deleteBtn.addEventListener('click', deleteNote)
-saveBtn.addEventListener('click', addNoteToDom)
+deleteBtn.addEventListener('click', deleteNote);
+saveBtn.addEventListener('click', addNoteToDom);
+searchInput.addEventListener('input', searchNotes);
+document.addEventListener('domContentLoaded', displayNotesInStorage)
 
-
+checkUi();
 };
 
 init();
