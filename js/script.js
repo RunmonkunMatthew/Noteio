@@ -22,38 +22,43 @@ function displayNotesInStorage() {
   let notesFromStorage = getNotesFromStorage();
   
   notesFromStorage.forEach((note) => {
-    allnotes.appendChild;
+    
+    addNoteToDom(note.header, note.body);
   })
-}
+} 
+
 // add notes to the Dom
-function addNoteToDom(){
+function addNoteToDom(headerText, bodyText){
   const div = document.createElement('div');
   div.classList = 'note';
   
   const header = document.createElement('h2');
   const body = document.createElement('p');
   
-  const allnotes = mainPage.querySelector('.allnotes');
- 
- const noteTitle = editNote.querySelector('input');
- const textArea = editNote.querySelector('textarea');
-
-  header.textContent = noteTitle.value;
-  body.textContent = textArea.value;
-
+  header.textContent = headerText;
+  body.textContent = bodyText;
+  
   div.appendChild(header)
   div.appendChild(body);
   
+const allnotes = mainPage.querySelector('.allnotes');
 
   allnotes.appendChild(div);
-  saveBtn.classList.add('hide');
   
-  addNoteToStorage();
+  checkUi();
 }
 
 //Add notes to local storage 
-function addNoteToStorage() {
-   notesFromStorage = getNotesFromStorage();
+function addNoteToStorage(headerValue, bodyValue) {
+  let notesFromStorage = getNotesFromStorage();
+  
+  let newNote = {
+    id: generateUniqueId(),
+    header: headerValue.trim(),
+    body: bodyValue.trim()
+  }
+  
+  notesFromStorage.push(newNote);
   
    localStorage.setItem('notes', JSON.stringify(notesFromStorage));
 };
@@ -61,14 +66,7 @@ function addNoteToStorage() {
 //get notes from storage
 function getNotesFromStorage() {
    let notes = JSON.parse(localStorage.getItem('notes')) || [];
-  
-   let newNote = {
-    header: noteInput.value,
-    body: textArea.value
-  };
- 
-   notes.push(newNote);
- 
+   
    return notes;
  };
 
@@ -103,7 +101,7 @@ function putNoteToEdit(e) {
     }
     
     if (selectedNote.classList.contains('note')) {
-      
+      const noteId = selectedNote.dataset.id;
       notes.forEach((note) => {
         note.classList.remove('selected')
       });
@@ -122,7 +120,9 @@ const selectedNoteTitle = editPage.querySelector('h5');
      selectedNoteTitle.innerText = header.innerText;
     }
     
- showEditPage();
+    document.querySelector('.edit-note').dataset.id = noteId;
+    
+  showEditPage();
 };
 
 //search function 
@@ -145,7 +145,32 @@ function searchNotes(e) {
 }
 
 function saveNotes() {
-  saveBtn.classList.add('hide');
+  const headerText = noteInput.value.trim(); 
+  const bodyText = textArea.value.trim();  
+
+  if (headerText === '' && bodyText === '') {
+    showAlert('Note cannot be empty!');
+    return;
+  }
+
+// Add Notes to Dom
+  addNoteToDom(headerText, bodyText);
+  
+  // Add Notes to local storage 
+  addNoteToStorage(headerText, bodyText);
+}
+
+// Save edited notes 
+function saveEditedNote() {
+  const noteToBeEdited = document.querySelector('.edit-note');
+  const noteId = noteToBeEdited.dataset.id;
+  
+  const UpdatedHeader = noteToBeEdited.querySelector('input').value.trim();
+  const updatedBody = noteToBeEdited.querySelector('textarea').value.trim();
+  
+  if (UpdatedHeader && updatedBody) {
+    updateNoteInStorage(noteId, updatedBody, UpdatedHeader)
+  }
 }
 
 //show main page
@@ -229,6 +254,20 @@ function checkUi() {
  
 }
 
+function showAlert(message) {
+  const alertEl = document.createElement('div');
+  alertEl.classList.add('alert');
+  alertEl.appendChild(document.createTextNode(message));
+  
+  document.querySelector('.alertdiv').appendChild(alertEl);
+  
+  setTimeout(() => alertEl.remove() , 2000);
+}
+
+function generateUniqueId() {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+}
+
 
 //Initialize 
 function init() {
@@ -253,9 +292,9 @@ textArea.addEventListener('input', () => {
 })
 clearBtn.addEventListener('click', clearAllNotes);  
 deleteBtn.addEventListener('click', deleteNote);
-saveBtn.addEventListener('click', addNoteToDom);
+saveBtn.addEventListener('click', saveNotes);
 searchInput.addEventListener('input', searchNotes);
-document.addEventListener('domContentLoaded', displayNotesInStorage)
+document.addEventListener('DomContentLoaded', displayNotesInStorage)
 
 checkUi();
 };
