@@ -23,7 +23,7 @@ function displayNotesInStorage() {
   
   notesFromStorage.forEach((note) => {
     
-    addNoteToDom(note.header, note.body);
+    addNoteToDom(note.id, note.header, note.body);
   })
 } 
 
@@ -124,7 +124,7 @@ const selectedNoteTitle = editPage.querySelector('h5');
      selectedNoteTitle.innerText = header.innerText;
     }
     
-   editNote.dataset.id = selectedNote.dataset.id;;
+   editNote.dataset.id = selectedNote.dataset.id;
     
   showEditPage();
 };
@@ -218,6 +218,11 @@ function deleteNote(e) {
   
   if (selectedNote) {
     selectedNote.remove();
+    
+    const noteId = selectedNote.dataset.id;
+    
+   removeNoteFromStorage(noteId);
+    
     showMainPage();
   } else {
     return;
@@ -225,11 +230,21 @@ function deleteNote(e) {
   closeOffcanvas();
 }
 
+function removeNoteFromStorage(noteId) {
+  notesFromStorage = getNotesFromStorage();
+  
+  notesFromStorage = notesFromStorage.filter((note) => note.id !== noteId);
+  
+  localStorage.setItem('notes', JSON.stringify(notesFromStorage));
+}
+
 //Clear all notes
 function clearAllNotes() {
   const allNotes = mainPage.querySelector('.allnotes');
   
   allNotes.innerHTML = '';
+  
+  localStorage.removeItem('notes');
   
   checkUi();
 };
@@ -300,7 +315,7 @@ clearBtn.addEventListener('click', clearAllNotes);
 deleteBtn.addEventListener('click', deleteNote);
 saveBtn.addEventListener('click', saveNotes);
 searchInput.addEventListener('input', searchNotes);
-document.addEventListener('DomContentLoaded', displayNotesInStorage)
+window.addEventListener('DOMContentLoaded', displayNotesInStorage)
 
 checkUi();
 };
