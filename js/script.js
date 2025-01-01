@@ -28,9 +28,10 @@ function displayNotesInStorage() {
 } 
 
 // add notes to the Dom
-function addNoteToDom(headerText, bodyText){
+function addNoteToDom(noteId, headerText, bodyText){
   const div = document.createElement('div');
   div.classList = 'note';
+  div.dataset.id = noteId;
   
   const header = document.createElement('h2');
   const body = document.createElement('p');
@@ -49,11 +50,11 @@ const allnotes = mainPage.querySelector('.allnotes');
 }
 
 //Add notes to local storage 
-function addNoteToStorage(headerValue, bodyValue) {
+function addNoteToStorage(noteId, headerValue, bodyValue) {
   let notesFromStorage = getNotesFromStorage();
   
   let newNote = {
-    id: generateUniqueId(),
+    id: noteId,
     header: headerValue.trim(),
     body: bodyValue.trim()
   }
@@ -100,8 +101,11 @@ function putNoteToEdit(e) {
       selectedNote = selectedNote.closest('.note');
     }
     
-    if (selectedNote.classList.contains('note')) {
+    if (selectedNote && selectedNote.classList.contains('note')) {
+      
       const noteId = selectedNote.dataset.id;
+      console.log(noteId);
+      
       notes.forEach((note) => {
         note.classList.remove('selected')
       });
@@ -110,17 +114,17 @@ function putNoteToEdit(e) {
 const textArea = editNote.querySelector('textarea');
 const selectedNoteTitle = editPage.querySelector('h5');
 
-     const header = selectedNote.querySelector('h2');
-   const body = selectedNote.querySelector('p');
+     const header = selectedNote.querySelector('h2') || document.createElement('h2');
+   const body = selectedNote.querySelector('p') || document.createElement('p');
    
    selectedNote.classList.add('selected');
      
-    noteTitle.value =   header.innerText;
-     textArea.value = body.innerText;
+    noteTitle.value =   header.innerText || 'Untitled Note';
+     textArea.value = body.innerText || 'No Content Available';
      selectedNoteTitle.innerText = header.innerText;
     }
     
-    document.querySelector('.edit-note').dataset.id = noteId;
+   editNote.dataset.id = selectedNote.dataset.id;;
     
   showEditPage();
 };
@@ -152,12 +156,14 @@ function saveNotes() {
     showAlert('Note cannot be empty!');
     return;
   }
+  
+  const noteId = generateUniqueId();
 
 // Add Notes to Dom
-  addNoteToDom(headerText, bodyText);
+  addNoteToDom(noteId, headerText, bodyText);
   
   // Add Notes to local storage 
-  addNoteToStorage(headerText, bodyText);
+  addNoteToStorage(noteId, headerText, bodyText);
 }
 
 // Save edited notes 
