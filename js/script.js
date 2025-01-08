@@ -125,7 +125,12 @@ const selectedNoteTitle = editPage.querySelector('h5');
     }
     
    editNote.dataset.id = selectedNote.dataset.id;
-    
+   
+   saveBtn.dataset.id = 'update';
+   
+   saveBtn.innerHTML = `
+      <i class="fa fa-edit"></i>
+   `
   showEditPage();
 };
 
@@ -164,19 +169,60 @@ function saveNotes() {
   
   // Add Notes to local storage 
   addNoteToStorage(noteId, headerText, bodyText);
+  
 }
 
 // Save edited notes 
 function saveEditedNote() {
   const noteToBeEdited = document.querySelector('.edit-note');
+  
   const noteId = noteToBeEdited.dataset.id;
   
-  const UpdatedHeader = noteToBeEdited.querySelector('input').value.trim();
+  const updatedHeader = noteToBeEdited.querySelector('input').value.trim();
+  
   const updatedBody = noteToBeEdited.querySelector('textarea').value.trim();
   
-  if (UpdatedHeader && updatedBody) {
-    updateNoteInStorage(noteId, updatedBody, UpdatedHeader)
+  if (!updatedHeader && !updatedBody) {
+    showAlert('Note cannot be empty!');
+      return;
   }
+  
+  //update note in storage 
+  updateNoteInStorage(noteId, updatedHeader, updatedBody);
+  
+  // update note in the dom
+  const selectedNote = document.querySelector(`.note[data-id="${noteId}"]`);
+  
+  console.log(selectedNote);
+  
+  if (selectedNote) {
+    const headerEl = selectedNote.querySelector('h2');
+    const bodyEl = selectedNote.querySelector('p');
+    
+    headerEl.textContent = updatedHeader || 'Untitled Note';
+    bodyEl.textContent = updatedBody || 'No Content Available';
+  }
+  
+  showAlert('Note Updated Successfully')
+}
+
+// update note in storage 
+function updateNoteInStorage(noteId, updatedHeader, updatedBody) {
+  let notesFromStorage = getNotesFromStorage();
+  
+    notesFromStorage =  notesFromStorage.map((note) => {
+    if (note.id === noteId) {
+    
+      return {
+        ...note,
+        header: updatedHeader, 
+        body: updatedBody }
+    }
+    return note;
+  });
+  
+  // save updated note 
+  localStorage.setItem('notes', JSON.stringify(notesFromStorage));
 }
 
 //show main page
@@ -196,8 +242,9 @@ function showMainPage() {
  
     if (noteInput.value === '') {
    noteInput.value = 'Note Title'
-  return; 
+  return;
 }
+    saveBtn.innerHTML = ``
     checkUi();
 };
 
@@ -247,6 +294,8 @@ function clearAllNotes() {
   localStorage.removeItem('notes');
   
   checkUi();
+  
+  closeOffcanvas();
 };
 
 function closeOffcanvas() {
@@ -290,6 +339,8 @@ function generateUniqueId() {
 }
 
 
+
+
 //Initialize 
 function init() {
    //Event Listeners
@@ -305,19 +356,33 @@ addBtn.forEach((btn) => {
 })
 
 backArrow.addEventListener('click', showMainPage);
+
 noteInput.addEventListener('input', () => {
   saveBtn.classList.remove('hide');
 })
 textArea.addEventListener('input', () => {
   saveBtn.classList.remove('hide');
-})
+});
+
 clearBtn.addEventListener('click', clearAllNotes);  
+
 deleteBtn.addEventListener('click', deleteNote);
-saveBtn.addEventListener('click', saveNotes);
+
+saveBtn.addEventListener('click', () => {
+  if (saveBtn.dataset.id === 'update') {
+   saveEditedNote();
+} else{
+  saveNotes();
+}
+  
+});
+
 searchInput.addEventListener('input', searchNotes);
+
 window.addEventListener('DOMContentLoaded', displayNotesInStorage)
 
 checkUi();
 };
 
 init();
+
