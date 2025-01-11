@@ -90,6 +90,12 @@ const check = document.querySelector('.check');
     editPage.classList.add('show')
     editPage.classList.remove('hide');
     
+    saveBtn.removeAttribute('data-id');
+    
+    saveBtn.innerHTML = `
+      <i class="fa-regular fa-floppy-disk"></i>
+    `;
+    
     closeOffcanvas();
 }
 
@@ -104,7 +110,6 @@ function putNoteToEdit(e) {
     if (selectedNote && selectedNote.classList.contains('note')) {
       
       const noteId = selectedNote.dataset.id;
-      console.log(noteId);
       
       notes.forEach((note) => {
         note.classList.remove('selected')
@@ -193,8 +198,6 @@ function saveEditedNote() {
   // update note in the dom
   const selectedNote = document.querySelector(`.note[data-id="${noteId}"]`);
   
-  console.log(selectedNote);
-  
   if (selectedNote) {
     const headerEl = selectedNote.querySelector('h2');
     const bodyEl = selectedNote.querySelector('p');
@@ -203,7 +206,6 @@ function saveEditedNote() {
     bodyEl.textContent = updatedBody || 'No Content Available';
   }
   
-  showAlert('Note Updated Successfully')
 }
 
 // update note in storage 
@@ -219,16 +221,25 @@ function updateNoteInStorage(noteId, updatedHeader, updatedBody) {
         body: updatedBody }
     }
     return note;
-  });
+  }
+  );
   
   // save updated note 
   localStorage.setItem('notes', JSON.stringify(notesFromStorage));
+  
+ showAlert('Note Updated Successfully');
 }
 
 //show main page
 function showMainPage() {
   saveBtn.classList.add('hide');
+  
+    const searchInput = document.querySelector('#searchinput');
+  searchInput.value = '';
+  
   notes.forEach((note) => {
+    note.style.display = 'block'
+    
     note.classList.remove('selected');
   })
   
@@ -239,12 +250,12 @@ function showMainPage() {
     editPage.classList.add('hide')
     editPage.classList.remove('show');
     
- 
     if (noteInput.value === '') {
    noteInput.value = 'Note Title'
   return;
 }
-    saveBtn.innerHTML = ``
+   saveBtn.innerHTML = ``;
+    
     checkUi();
 };
 
@@ -257,6 +268,7 @@ function showEditPage() {
     body.style.backgroundColor = '#ededd1';
     editPage.classList.add('show')
     editPage.classList.remove('hide');
+    
 };
 
 //delete note
@@ -373,6 +385,7 @@ saveBtn.addEventListener('click', () => {
    saveEditedNote();
 } else{
   saveNotes();
+ showAlert('Note created successfully');
 }
   
 });
@@ -385,4 +398,3 @@ checkUi();
 };
 
 init();
-

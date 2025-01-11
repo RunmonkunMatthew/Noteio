@@ -282,8 +282,9 @@ main .edit .edit-note textarea{
   width: 75%;
   font: 0.5em;
   color: white;
-  display: none
+  width: 100%;
 }
+
 .show{
   display: block;
 }
