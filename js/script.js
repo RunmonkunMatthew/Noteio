@@ -17,6 +17,20 @@ const clearBtn = document.querySelector('#clearbtn');
 const deleteBtn = editPage.querySelector('#delete');
 const ExportBtn = editPage.querySelector('#export');
 
+// Pwa plug-in
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then((registration) => {
+        console.log('Service Worker registered:', registration);
+      })
+      .catch((error) => {
+        console.log('Service Worker registration failed:', error);
+      });
+  });
+}
+
 //display notes in the dom
 function displayNotesInStorage() {
   let notesFromStorage = getNotesFromStorage();
