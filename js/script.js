@@ -295,6 +295,8 @@ function deleteNote(e) {
     const noteId = selectedNote.dataset.id;
     
    removeNoteFromStorage(noteId);
+   
+   showAlert('Note Deleted Successfully')
     
     showMainPage();
   } else {
