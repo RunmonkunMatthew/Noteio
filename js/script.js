@@ -362,7 +362,7 @@ function showAlert(message) {
   
   document.querySelector('.alertdiv').appendChild(alertEl);
   
-  setTimeout(() => alertEl.remove() , 3000);
+  setTimeout(() => alertEl.remove() , 1000);
 }
 
 function generateUniqueId() {
