@@ -321,6 +321,8 @@ function clearAllNotes() {
   
   checkUi();
   
+ showAlert('Notes Cleared Successfully')
+  
   closeOffcanvas();
 };
 
@@ -353,11 +355,12 @@ function checkUi() {
 function showAlert(message) {
   const alertEl = document.createElement('div');
   alertEl.classList.add('alert');
+  alertEl.style.backgroundColor = 'mediumseagreen'
   alertEl.appendChild(document.createTextNode(message));
   
   document.querySelector('.alertdiv').appendChild(alertEl);
   
-  setTimeout(() => alertEl.remove() , 2000);
+  setTimeout(() => alertEl.remove() , 3000);
 }
 
 function generateUniqueId() {

@@ -2,10 +2,10 @@ const CACHE_NAME = 'noteio-v1';
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
-  '/css/styles.css',
-  '/js/app.js',
-  '/assets/icons/icon-192x192.png',
-  '/assets/icons/icon-512x512.png'
+  '/css/stylesheet.css',
+  '/js/script.js',
+  '/image/icons/noteio-192x192.jpg',
+  '/image/icons/noteio-512x512.jpg'
 ];
 
 // Install Service Worker
