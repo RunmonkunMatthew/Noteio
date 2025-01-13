@@ -21,7 +21,7 @@ const ExportBtn = editPage.querySelector('#export');
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('/service-worker.js')
+      .register('./service-worker.js')
       .then((registration) => {
         console.log('Service Worker registered:', registration);
       })
@@ -42,7 +42,7 @@ function displayNotesInStorage() {
 } 
 
 // add notes to the Dom
-function addNoteToDom(noteId, headerText, bodyText){
+function addNoteToDom(noteId, headerText, bodyText, noteColor){
   const div = document.createElement('div');
   div.classList = 'note';
   div.dataset.id = noteId;
@@ -369,7 +369,15 @@ function generateUniqueId() {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
-
+// generate random colors
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 
 //Initialize 
