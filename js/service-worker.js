@@ -4,7 +4,7 @@ const FILES_TO_CACHE = [
   '/index.html',
   '/css/stylesheet.css',
   '/js/script.js',
-  '/image/icons/noteio-192x192.jpg',
+  '/image/noteio-192x192.jpg',
   '/image/icons/noteio-512x512.jpg'
 ];
 

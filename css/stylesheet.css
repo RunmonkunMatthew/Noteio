@@ -54,6 +54,11 @@ header .offcanvas-body ul li a:hover{
   font-size: 1.2em;
 }
 
+header .offcanvas-body p{
+  margin: auto;
+  font-family: sans-serif;
+}
+
 header .small{
   width: 60%;
   margin-top: 1em;

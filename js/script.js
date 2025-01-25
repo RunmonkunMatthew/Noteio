@@ -21,7 +21,7 @@ const ExportBtn = editPage.querySelector('#export');
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('./service-worker.js')
+      .register('/js/service-worker.js')
       .then((registration) => {
         console.log('Service Worker registered:', registration);
       })
@@ -46,6 +46,7 @@ function addNoteToDom(noteId, headerText, bodyText, noteColor){
   const div = document.createElement('div');
   div.classList = 'note';
   div.dataset.id = noteId;
+  div.setAttribute('data-aos', 'zoom-in');
   
   const header = document.createElement('h2');
   const body = document.createElement('p');
@@ -173,6 +174,7 @@ function searchNotes(e) {
 }
 
 function saveNotes() {
+  const note = allnotes.querySelector('.selected');
   const headerText = noteInput.value.trim(); 
   const bodyText = textArea.value.trim();  
 
@@ -311,6 +313,36 @@ function removeNoteFromStorage(noteId) {
   notesFromStorage = notesFromStorage.filter((note) => note.id !== noteId);
   
   localStorage.setItem('notes', JSON.stringify(notesFromStorage));
+}
+
+// Export notes 
+function exportNoteAsText() {
+  const selectedNote = allnotes.querySelector('.note .selected');
+  
+  if (!selectedNote) {
+    showAlert('Please select a note');
+    return;
+  }
+  
+  
+  
+  const noteTitle = selectedNote.querySelector('input') ?.value || 'Untitled Note';
+  
+  const noteBody = selectedNote.querySelector('textarea')?.value ||  '';
+  
+    const content = `${noteTitle}\n\n${noteBody}`;
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    
+    const url = URL.createObjectURL(blob);
+   
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${noteTitle || 'Untitled Note'}.noteio`;
+    
+    link.click();
+   
+    URL.revokeObjectURL(url);
 }
 
 //Clear all notes
